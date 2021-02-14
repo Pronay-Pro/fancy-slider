@@ -1,9 +1,17 @@
+// ***Bonus pointAdding***
+// <!-- 1.Add a Spinner when user search for any thing.
+// 2.When user search for unknown image or invalid input user will be see a message -->
+
+
+
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const hideSlider = document.getElementById("hide-slider")
+const error = document.getElementById("error")
 // selected image 
 let sliders = [];
 
@@ -11,13 +19,6 @@ document.getElementById("search").addEventListener('keypress',function(event){
   if(event.key= "Enter"){
     // console.log(event)
     document.getElementById("search-btn").click()
-  }
-  
-})
-document.getElementById("duration").addEventListener('keypress',function(event){
-  if(event.key= "Enter"){
-    // console.log(event)
-    document.getElementById("create-slider").click()
   }
 })
 // If this key doesn't work
@@ -29,9 +30,31 @@ const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     // .then(data => console.log(data))
-    .then(data => showImages(data.hits))
-    .catch(() => {
-  })
+    .then(data => {
+      if(data.hits==0 | data.hits == ''){
+        spinner()
+        error.innerHTML = `
+        <img class= img-fluid src="img/404.png" alt="">
+        <h2 class ="text-center">Sorry!!Can't Find This Kind of Catagories Image</h2>
+        `
+        hideSlider.classList.add("d-none")
+        gallery.innerHTML = ""
+      }
+      else{
+        showImages(data.hits)
+        hideSlider.classList.remove("d-none")
+        error.innerHTML = ""
+      }
+    })
+    .catch(()=>{
+      spinner()
+      error.innerHTML =`
+      <img  img-fluid src="img/404.png" alt="">
+      <h2 class ="text-center">Sorry!!</h2>
+      `
+      hideSlider.classList.add("d-none")
+      gallery.innerHTML = " "
+    })
 }
 // show images 
 const showImages = (images) => {

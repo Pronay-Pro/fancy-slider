@@ -1,3 +1,6 @@
+body{
+  font-family: 'Acme', sans-serif;
+}
 #sliders {
   height: 400px;
   width: 60%;
@@ -54,7 +57,14 @@ img {
 .main {
   display: none;
 }
-
+#search{
+  border-radius: 20px;
+}
+#search-btn,#create-slider{
+ background-color: crimson;
+ border: crimson;
+ border-radius: 20px;
+}
 @media (max-width: 767px) {
   .justify-content-around.align-items-center.mt-3.gallery-header.mb-2 {
     flex-direction: column;
