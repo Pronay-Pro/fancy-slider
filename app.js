@@ -10,7 +10,6 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
-const hideSlider = document.getElementById("hide-slider")
 const error = document.getElementById("error")
 // selected image 
 let sliders = [];
@@ -37,12 +36,12 @@ const getImages = (query) => {
         <img class= img-fluid src="img/404.png" alt="">
         <h2 class ="text-center">Sorry!!Can't Find This Kind of Catagories Image</h2>
         `
-        hideSlider.classList.add("d-none")
+        hideSlider()
         gallery.innerHTML = ""
       }
       else{
         showImages(data.hits)
-        hideSlider.classList.remove("d-none")
+        hideSlider()
         error.innerHTML = ""
       }
     })
@@ -50,9 +49,9 @@ const getImages = (query) => {
       spinner()
       error.innerHTML =`
       <img  img-fluid src="img/404.png" alt="">
-      <h2 class ="text-center">Sorry!!</h2>
+      <h2 class ="text-center">Sorry!!Can't Find This Kind of Catagories Image</h2>
       `
-      hideSlider.classList.add("d-none")
+      hideSlider()
       gallery.innerHTML = " "
     })
 }
@@ -168,4 +167,8 @@ const spinner = () =>{
   const togglerSpinners = document.getElementById("spinner")
   togglerSpinners.classList.toggle("d-none")
   // console.log(togglerSpinners)
+}
+const hideSlider =()=>{
+  const hideSlider = document.getElementById("hide-slider")
+  hideSlider.classList.toggle("d-none")
 }
