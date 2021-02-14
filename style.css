@@ -57,6 +57,9 @@ img {
 .main {
   display: none;
 }
+.icon{
+  color:crimson;
+}
 #search{
   border-radius: 20px;
 }
